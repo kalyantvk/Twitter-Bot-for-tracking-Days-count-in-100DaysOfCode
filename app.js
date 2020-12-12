@@ -54,34 +54,33 @@ function getdayCount(day) //function which consumes day count and returns update
 
 //getting current username of the twitter profile
 oauth.post('https://api.twitter.com/1.1/account/update_profile.json',
-						twitter_user_access_token,  // oauth_token (user access token)
-						twitter_user_secret,  // oauth_secret (user secret)
-						postBody,  // post body
-						'',  // post content type ?
-						function(err, data, res) {
-							if (err) {
-								console.log(err);
-							} else {
-								 //console.log("-----Success-----"+data);
-								currName=JSON.parse(data).name;
-								console.log(currName); 
-								updatedDay=getdayCount(curName); //will get updated daycount
-								
-								myname="StopNot!-"+updatedDay; //Here we are creating new username
+	twitter_user_access_token,  // oauth_token (user access token)
+	twitter_user_secret,  // oauth_secret (user secret)
+	postBody,  // post body
+	'',  // post content type ?
+	function(err, data, res) {
+			if (err) {
+				console.log(err);
+			} else {
+				 //console.log("-----Success-----"+data);
+				currName=JSON.parse(data).name;
+				console.log(currName); 
+				updatedDay=getdayCount(curName); //will get updated daycount
+			 	myname="StopNot!-"+updatedDay; //Here we are creating new username
 							
-                //updating name through the same api
-								oauth.post('https://api.twitter.com/1.1/account/update_profile.json',
-								twitter_user_access_token,  // oauth_token (user access token)
-								twitter_user_secret,  // oauth_secret (user secret)
-								{"name":myname},  // post body //sending name as payload
-								'',  // post content type ?
-								function(err, data, res) {
-									if (err) {
-										console.log(err);
-									} else {
-										 console.log("-----Success-----"+data);			 //if everything goes fine. then you can this success message		
-									}
-								});
+               				 //updating name through the same api
+					oauth.post('https://api.twitter.com/1.1/account/update_profile.json',
+					twitter_user_access_token,  // oauth_token (user access token)
+					twitter_user_secret,  // oauth_secret (user secret)
+					{"name":myname},  // post body //sending name as payload
+					'',  // post content type ?
+					function(err, data, res) {
+					if (err) {
+						console.log(err);
+					} else {
+						console.log("-----Success-----"+data);			 //if everything goes fine. then you can this success message		
+					}
+					});
 						
-							}
-						});
+			}
+});
